@@ -101,7 +101,6 @@
     <Compile Include="MyProgress.Designer.cs">
       <DependentUpon>MyProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyProjectIdentifier.cs" />
     <Compile Include="ProjectInfo.cs">
       <SubType>Form</SubType>
     </Compile>

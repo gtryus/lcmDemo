@@ -7,29 +7,37 @@ namespace lcmDemo
 {
     public partial class MyProgress : Form, IThreadedProgress
     {
-        private bool startCancel;
-        private bool finishCancel;
+        private bool _allowCancel;
+        private bool _startCancel;
+        private bool _finishCancel;
 
         public MyProgress()
         {
             InitializeComponent();
         }
 
-        public bool Canceled { get { return finishCancel; } }
+        public bool Canceled { get { return _finishCancel; } }
 
-        public bool IsCanceling { get { return startCancel && !finishCancel; } }
+        public bool IsCanceling { get { return _startCancel && !_finishCancel; } }
 
-        public string Title { get { return base.Text;  } set { base.Text = value; } }
+        public string Title { get { return this.Text;  } set { this.Text = value; } }
         public string Message { get { return textBox1.Text; } set { textBox1.Text = value; } }
         public int Position { get { return progressBar1.Value; } set { progressBar1.Value = value; } }
         public int StepSize { get { return progressBar1.Step; } set { progressBar1.Step = value; } }
         public int Minimum { get { return progressBar1.Minimum;  } set { progressBar1.Minimum = value; } }
         public int Maximum { get { return progressBar1.Maximum; } set { progressBar1.Maximum = value; } }
 
-        public ISynchronizeInvoke SynchronizeInvoke => throw new NotImplementedException();
+        public ISynchronizeInvoke SynchronizeInvoke
+        {
+            get
+            {
+                if (IsDisposed) throw new InvalidOperationException("Progress bar used after disposed");
+                return this;
+            }
+        }
 
-        public bool IsIndeterminate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool AllowCancel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsIndeterminate { get { return progressBar1.Style == ProgressBarStyle.Marquee; } set { progressBar1.Style = value ? ProgressBarStyle.Marquee : ProgressBarStyle.Continuous; } }
+        public bool AllowCancel { get { return _allowCancel; } set { _allowCancel = value; } }
 
         public event CancelEventHandler Canceling;
 
@@ -40,19 +48,21 @@ namespace lcmDemo
 
         public object RunTask(bool fDisplayUi, Func<IThreadedProgress, object[], object> backgroundTask, params object[] parameters)
         {
+            if (fDisplayUi) Hide();
             return backgroundTask(this, parameters);
         }
 
         public void Step(int amount)
         {
-            progressBar1.Value += progressBar1.Step;
+            progressBar1.Value += amount;
         }
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            startCancel = true;
+            if (!_allowCancel) return;
+            _startCancel = true;
             Canceling?.Invoke(this, (CancelEventArgs)e);
-            finishCancel = true;
+            _finishCancel = true;
             DialogResult = DialogResult.Cancel;
         }
     }

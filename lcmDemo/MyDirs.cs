@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SIL.LCModel;
+﻿using SIL.LCModel;
 using SIL.Tool;
 using System.IO;
 
