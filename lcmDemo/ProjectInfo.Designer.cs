@@ -32,12 +32,14 @@
             this.NameTb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.EntryCountTb = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 0;
@@ -67,11 +69,29 @@
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 17);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Entries";
+            // 
+            // EntryCountTb
+            // 
+            this.EntryCountTb.Location = new System.Drawing.Point(64, 40);
+            this.EntryCountTb.Name = "EntryCountTb";
+            this.EntryCountTb.Size = new System.Drawing.Size(144, 22);
+            this.EntryCountTb.TabIndex = 5;
+            // 
             // ProjectInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 415);
+            this.Controls.Add(this.EntryCountTb);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NameTb);
@@ -90,5 +110,7 @@
         private System.Windows.Forms.TextBox NameTb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox EntryCountTb;
     }
 }

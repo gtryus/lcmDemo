@@ -2,6 +2,7 @@
 // License: MIT
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -46,6 +47,11 @@ namespace lcmDemo
             }
             NameTb.Text = _cache.ProjectId.Name;
             PopulateWritingSystemsList();
+            var svcloc = _cache.ServiceLocator;
+            var entries = svcloc.GetInstance<ILexEntryRepository>().AllInstances()
+                .Where(lx => lx.LexemeFormOA != null && lx.LexemeFormOA.Form.StringCount > 0)
+                .ToList();
+            EntryCountTb.Text = entries.Count.ToString();
         }
 
         private void PopulateWritingSystemsList()
