@@ -44,7 +44,26 @@ namespace lcmDemo
             {
                 _cache = LcmCache.CreateCacheFromExistingData(new LocalProjectId(BackendProviderType.kSharedXML, projectPath), Thread.CurrentThread.CurrentUICulture.Name, ui, dirs, settings, progressDlg);
             }
+            NameTb.Text = _cache.ProjectId.Name;
+            PopulateWritingSystemsList();
+        }
 
+        private void PopulateWritingSystemsList()
+        {
+            listView1.View = View.Details;
+            listView1.Columns.Add("Type");
+            var col1 = listView1.Columns.Add("Name");
+            col1.Width *= 3;
+            var col2 = listView1.Columns.Add("Id");
+            col2.Width *= 2;
+            foreach (var ws in _cache.LangProject.VernacularWritingSystems)
+            {
+                listView1.Items.Add(new ListViewItem(new string[] { "Vernacular", ws.LanguageName, ws.Id }));
+            }
+            foreach (var ws in _cache.LangProject.AnalysisWritingSystems)
+            {
+                listView1.Items.Add(new ListViewItem(new string[] { "Analysis", ws.LanguageName, ws.Id }));
+            }
         }
 
         public ISynchronizeInvoke SynchronizeInvoke
