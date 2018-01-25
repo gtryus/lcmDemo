@@ -1,4 +1,6 @@
-﻿using SIL.LCModel;
+﻿// Copyright (c) 2010-2018 SIL International
+// License: MIT
+using SIL.LCModel;
 using SIL.Tool;
 using System.IO;
 

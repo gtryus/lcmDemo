@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2010-2018 SIL International
+// License: MIT
+using System;
 using System.IO;
 using System.Windows.Forms;
 

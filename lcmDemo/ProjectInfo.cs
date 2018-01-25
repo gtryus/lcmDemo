@@ -1,6 +1,9 @@
-﻿using System;
+﻿// Copyright (c) 2010-2018 SIL International
+// License: MIT
+using System;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using SIL.LCModel;
 using SIL.WritingSystems;
@@ -10,6 +13,7 @@ namespace lcmDemo
     public partial class ProjectInfo : Form
     {
         public string SelectedProject { get; set; }
+        public LcmCache _cache;
 
         public ProjectInfo()
         {
@@ -26,13 +30,20 @@ namespace lcmDemo
                 else
                     throw new InvalidOperationException();
             }
+            SIL.LCModel.Core.Text.Icu.InitIcuDataDir();
             if (!Sldr.IsInitialized) Sldr.Initialize(true);
             var dirs = new MyDirs();
+            var projectPath = Path.Combine(dirs.ProjectsDirectory, SelectedProject, SelectedProject + LcmFileHelper.ksFwDataXmlFileExtension);
             var ui = new SilentLcmUI(SynchronizeInvoke);
-            var settings = new LcmSettings();
-            var progress = new MyProgress();
-            var projectPath = Path.Combine(dirs.ProjectsDirectory, SelectedProject, SelectedProject + ".fwdata");
-            var cache = LcmCache.CreateCacheFromLocalProjectFile(projectPath, "en", ui, dirs, settings, progress);
+            var settings = new LcmSettings { DisableDataMigration = true, UpdateGlobalWSStore = false };
+            //using (var progressDlg = new MyProgress())
+            //{
+            //    _cache = LcmCache.CreateCacheFromLocalProjectFile(projectPath, Thread.CurrentThread.CurrentUICulture.Name, ui, dirs, settings, progressDlg);
+            //}
+            using (var progressDlg = new MyProgress())
+            {
+                _cache = LcmCache.CreateCacheFromExistingData(new LocalProjectId(BackendProviderType.kSharedXML, projectPath), Thread.CurrentThread.CurrentUICulture.Name, ui, dirs, settings, progressDlg);
+            }
 
         }
 
