@@ -117,7 +117,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryHelperLite.cs" />
+    <Compile Include="RegistrySetting.cs" />
     <EmbeddedResource Include="ChooseProject.resx">
       <DependentUpon>ChooseProject.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,4 +150,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="..\lib\$(Platform)\icudt54.dll;..\lib\$(Platform)\icuin54.dll;..\lib\$(Platform)\icutu54.dll;..\lib\$(Platform)\icuuc54.dll" DestinationFolder="$(OutputPath)" Condition="'$(Platform)' == 'x86' or '$(Platform)' == 'x64'" />
+  </Target>
 </Project>

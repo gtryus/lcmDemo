@@ -88,13 +88,10 @@ copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_Palaso
 copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/icu.net.dll ../Lib/icu.net.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/icu.net.dll.config ../Lib/icu.net.dll.config
 mkdir -p ../Lib/x86
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x86/icudt56.dll ../Lib/x86/icudt56.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x86/icuin56.dll ../Lib/x86/icuin56.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x86/icuuc56.dll ../Lib/x86/icuuc56.dll
-mkdir -p ../Lib/x64
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x64/icudt56.dll ../Lib/x64/icudt56.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x64/icuin56.dll ../Lib/x64/icuin56.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/x64/icuuc56.dll ../Lib/x64/icuuc56.dll
+copy_auto https://build.palaso.org/guestAuth/repository/download/Libraries_Icu4cWin32FieldWorksContinuous/.lastSuccessful/icudt54.dll ../Lib/x86/icudt54.dll
+copy_auto https://build.palaso.org/guestAuth/repository/download/Libraries_Icu4cWin32FieldWorksContinuous/.lastSuccessful/icuin54.dll ../Lib/x86/icuin54.dll
+copy_auto https://build.palaso.org/guestAuth/repository/download/Libraries_Icu4cWin32FieldWorksContinuous/.lastSuccessful/icutu54.dll ../Lib/x86/icutu54.dll
+copy_auto https://build.palaso.org/guestAuth/repository/download/Libraries_Icu4cWin32FieldWorksContinuous/.lastSuccessful/icuuc54.dll ../Lib/x86/icuuc54.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/SIL.Core.dll ../Lib/SIL.Core.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/SIL.Core.dll.config ../Lib/SIL.Core.dll.config
 copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/.lastSuccessful/SIL.Core.pdb ../Lib/SIL.Core.pdb

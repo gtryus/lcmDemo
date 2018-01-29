@@ -14,6 +14,7 @@ namespace lcmDemo
     public partial class ProjectInfo : Form
     {
         public string SelectedProject { get; set; }
+        public string ProjectFolder;
         public LcmCache _cache;
 
         public ProjectInfo()
@@ -26,15 +27,14 @@ namespace lcmDemo
             if (string.IsNullOrEmpty(SelectedProject))
             {
                 var dlg = new ChooseProject();
-                if (dlg.ShowDialog() == DialogResult.OK)
-                    SelectedProject = dlg.SelectedProject;
-                else
-                    throw new InvalidOperationException();
+                if (dlg.ShowDialog() != DialogResult.OK) throw new InvalidOperationException();
+                SelectedProject = dlg.SelectedProject;
+                ProjectFolder = dlg.ProjectFolder;
             }
             SIL.LCModel.Core.Text.Icu.InitIcuDataDir();
             if (!Sldr.IsInitialized) Sldr.Initialize(true);
             var dirs = new MyDirs();
-            var projectPath = Path.Combine(dirs.ProjectsDirectory, SelectedProject, SelectedProject + LcmFileHelper.ksFwDataXmlFileExtension);
+            var projectPath = Path.Combine(ProjectFolder, SelectedProject, SelectedProject + LcmFileHelper.ksFwDataXmlFileExtension);
             var ui = new SilentLcmUI(SynchronizeInvoke);
             var settings = new LcmSettings { DisableDataMigration = true, UpdateGlobalWSStore = false };
             //using (var progressDlg = new MyProgress())
