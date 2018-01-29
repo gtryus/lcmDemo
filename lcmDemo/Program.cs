@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2010-2018 SIL International
 // License: MIT
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace lcmDemo

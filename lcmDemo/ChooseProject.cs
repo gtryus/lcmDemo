@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2010-2018 SIL International
 // License: MIT
-using SIL.Tool;
 using System;
 using System.IO;
 using System.Windows.Forms;
