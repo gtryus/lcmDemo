@@ -12,7 +12,7 @@ namespace lcmDemo
         {
             get
             {
-                var dataFolder = RegistryHelperLite.FallbackStringValue(@"SIL\FieldWorks\8", "ProjectsDir");
+                var dataFolder = RegistrySetting.FallbackStringValue(@"SIL\FieldWorks\8", "ProjectsDir");
                 return dataFolder ?? @"C:\ProgramData\SIL\FieldWorks\Projects";
             }
         }
@@ -21,7 +21,7 @@ namespace lcmDemo
         {
             get
             {
-                var dataFolder = RegistryHelperLite.FallbackStringValue(@"SIL\FieldWorks\8", "RootCodeDir");
+                var dataFolder = RegistrySetting.FallbackStringValue(@"SIL\FieldWorks\8", "RootCodeDir");
                 return Path.Combine( dataFolder ?? @"C:\ProgramData\SIL\FieldWorks\Projects", "Templates");
             }
         }

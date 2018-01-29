@@ -23,3 +23,6 @@ PaTests.VisualState.xml
 .vs/
 DownloadInfoTemplate.exe
 Lib/*
+PortableLibrary
+lcmDemo.Windows
+lcmDemoApp.Android

@@ -63,6 +63,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SIL.Core">
+      <HintPath>..\Lib\SIL.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SIL.LCModel">
       <HintPath>..\Lib\SIL.LCModel.dll</HintPath>
     </Reference>
