@@ -14,7 +14,6 @@ namespace lcmDemo
     public partial class ProjectInfo : Form
     {
         public string SelectedProject { get; set; }
-        public string ProjectFolder;
         public LcmCache _cache;
 
         public ProjectInfo()
@@ -29,18 +28,15 @@ namespace lcmDemo
                 var dlg = new ChooseProject();
                 if (dlg.ShowDialog() != DialogResult.OK) throw new InvalidOperationException();
                 SelectedProject = dlg.SelectedProject;
-                ProjectFolder = dlg.ProjectFolder;
             }
             SIL.LCModel.Core.Text.Icu.InitIcuDataDir();
             if (!Sldr.IsInitialized) Sldr.Initialize(true);
             var dirs = new MyDirs();
-            var projectPath = Path.Combine(ProjectFolder, SelectedProject, SelectedProject + LcmFileHelper.ksFwDataXmlFileExtension);
+            var projectFolder = Path.IsPathRooted(SelectedProject) ? Path.GetDirectoryName(Path.GetDirectoryName(SelectedProject)) : dirs.ProjectsDirectory;
+            var name = Path.GetFileNameWithoutExtension(SelectedProject);
+            var projectPath = Path.Combine(projectFolder, name, name + LcmFileHelper.ksFwDataXmlFileExtension);
             var ui = new SilentLcmUI(SynchronizeInvoke);
             var settings = new LcmSettings { DisableDataMigration = true, UpdateGlobalWSStore = false };
-            //using (var progressDlg = new MyProgress())
-            //{
-            //    _cache = LcmCache.CreateCacheFromLocalProjectFile(projectPath, Thread.CurrentThread.CurrentUICulture.Name, ui, dirs, settings, progressDlg);
-            //}
             using (var progressDlg = new MyProgress())
             {
                 _cache = LcmCache.CreateCacheFromExistingData(new LocalProjectId(BackendProviderType.kSharedXML, projectPath), Thread.CurrentThread.CurrentUICulture.Name, ui, dirs, settings, progressDlg);

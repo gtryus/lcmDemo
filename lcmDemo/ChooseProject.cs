@@ -8,8 +8,7 @@ namespace lcmDemo
 {
     public partial class ChooseProject : Form
     {
-        public string SelectedProject { get; set; }
-        public string ProjectFolder { get; private set; }
+        public string SelectedProject { get; private set; }
 
         public ChooseProject()
         {
@@ -25,12 +24,13 @@ namespace lcmDemo
                     listBox1.Items.Add(Path.GetFileName(project));
                 }
             }
+            Ok.Enabled = false;
         }
 
         private void Ok_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedIndex < 0 || listBox1.SelectedIndex >= listBox1.Items.Count) return;
             SelectedProject = (string)listBox1.SelectedItem;
-            ProjectFolder = new MyDirs().ProjectsDirectory;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -39,17 +39,21 @@ namespace lcmDemo
 		{
 			var dlg = new OpenFileDialog();
 			dlg.Filter = @"Data (*.fwdata)|*.fwdata|Backup (*.fwbackup)|*.fwbackup|All FieldWorks Data|*.fwdata;*.fwbackup";
-			dlg.FilterIndex = 2;
+			dlg.FilterIndex = 1;
 			dlg.CheckFileExists = true;
-			dlg.InitialDirectory = new MyDirs().BackupDirectory;
+            dlg.InitialDirectory = @"C:\ProgramData\SIL\FieldWorks\Projects";
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				if (dlg.FileName.EndsWith(".fwbackup")) throw new NotImplementedException("Backup restore");
-				SelectedProject = Path.GetFileNameWithoutExtension(dlg.FileName);
-				ProjectFolder = Path.GetDirectoryName(Path.GetDirectoryName(dlg.FileName));
+				SelectedProject = dlg.FileName;
 				DialogResult = DialogResult.OK;
 				Close();
 			}
 		}
-	}
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Ok.Enabled = (listBox1.SelectedIndex >= 0 && listBox1.SelectedIndex < listBox1.Items.Count);
+        }
+    }
 }
